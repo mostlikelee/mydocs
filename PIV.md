@@ -109,7 +109,7 @@ SSH:
 `/etc/ssh/sshd_config`
 `/etc/ssh/ssh_config`
 https://support.apple.com/en-us/HT208372
-
+`grep -c ssh-keychain.dylib /etc/ssh/ssh_config`
 
 Config Profiles
 ---------------
