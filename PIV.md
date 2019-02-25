@@ -58,6 +58,11 @@ Sample:
 ```
 Note `formatString` which specifies if multiple strings are joined together
 
+Mapping process for local accounts (not needed for AD bound machine):
+- get User Principal Name off card
+- append UPN to user's directory record
+- add to `/etc/SmartcardLogin.plist`:
+
 Commands
 --------
 
@@ -80,6 +85,7 @@ Documentation
 `man SmartCardServices`  
 `man SmartCardServices-legacy`  
 `man pam_smartcard`  
+`system_profiler SPSmartCardsDataType`
 
 Commands (LEGACY)
 -----------------
@@ -94,6 +100,16 @@ Show any certificate hashes for a given username
 `sc_auth list -u *username*`
 
 
+PAM Modules / SSH
+-----------------
+PAM modules revert upon OS update.  Use ext attr to monitor and remediate.
+`/etc/pam.d/*`
+
+SSH:
+`/etc/ssh/sshd_config`
+`/etc/ssh/ssh_config`
+https://support.apple.com/en-us/HT208372
+
 
 Config Profiles
 ---------------
@@ -104,7 +120,7 @@ Key: tokenRemovalAction
 Type: Int  
 Setting: 1|0  
 
-Enable|Disable prompt when card is plugged in (does not affect existing pairings)  
+Enable|Disable prompt when card is plugged in (does not affect existing pairings, disable to avoid users pairing by themselves if admin)  
 payLoadType: com.apple.smardcard  
 Key: UserPairing  
 Type: Bool  
@@ -115,9 +131,16 @@ Type: Bool
 
 Make sure certificates on the card are trusted  
 Key: checkCertificateTrust  
-Type: ?  
+Type: Int
+Options:
+0 - no certificate trust needed
+1 - certificate trust on, no revocation check
+2 - certificate trust on, soft revocation
+	(will allow you to unlock if cannot CRL or OCSP)
+3 - certificate trust on, hard revocation
+	(will lock if cannot CRL or OCSP)
 
-Restrict user account to a single smart card, as opposed to multiple users on 1 account.    Doesn't affect current pairings  
+Restrict user account to a single smart card, as opposed to multiple users on 1 account (maybe Tier2 technicians accessing a local account) Doesn't affect current pairings  
 Key: OneCardPerUser  
 Type: Bool  
 
