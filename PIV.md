@@ -61,26 +61,25 @@ Note `formatString` which specifies if multiple strings are joined together
 Commands
 --------
 
-Others:
-`security list-smartcards`
-`security export-smartcard`
-`security smartcards`
+`security list-smartcards`  
+`security export-smartcard`  
+`security smartcards`  
 
-associate a user with a public key on a card
-`sc_auth pair`
-list all identities on all smart cards
-`sc_auth identities`
-list all public keys associated with a user
-`sc_auth list`
+associate a user with a public key on a card  
+`sc_auth pair`  
+list all identities on all smart cards  
+`sc_auth identities`  
+list all public keys associated with a user  
+`sc_auth list`  
 
 
 
 Documentation
 -------------
-`man ssh-keychain`
-`man SmartCardServices`
-`man SmartCardServices-legacy`
-`man pam_smartcard`
+`man ssh-keychain`  
+`man SmartCardServices`  
+`man SmartCardServices-legacy`  
+`man pam_smartcard`  
 
 Commands (LEGACY)
 -----------------
@@ -99,40 +98,40 @@ Show any certificate hashes for a given username
 Config Profiles
 ---------------
 
-Locks Screen when card is pulled out
-payloadType: com.apple.screensaver
-Key: tokenRemovalAction
-Type: Int
-Setting: 1|0
+Locks Screen when card is pulled out  
+payloadType: com.apple.screensaver  
+Key: tokenRemovalAction  
+Type: Int  
+Setting: 1|0  
 
-Enable|Disable prompt when card is plugged in (does not affect existing pairings)
-payLoadType: com.apple.smardcard
-Key: UserPairing
-Type: Bool
+Enable|Disable prompt when card is plugged in (does not affect existing pairings)  
+payLoadType: com.apple.smardcard  
+Key: UserPairing  
+Type: Bool  
 
-Enable|Disable cards for login/screesaver/auth
-Key: allowSmartCard
-Type: Bool
+Enable|Disable cards for login/screesaver/auth  
+Key: allowSmartCard  
+Type: Bool  
 
-Make sure certificates on the card are trusted
-Key: checkCertificateTrust
-Type: ?
+Make sure certificates on the card are trusted  
+Key: checkCertificateTrust  
+Type: ?  
 
-Restrict user account to a single smart card, as opposed to multiple users on 1 account.  Doesn't affect current pairings
-Key: OneCardPerUser
-Type: Bool
+Restrict user account to a single smart card, as opposed to multiple users on 1 account.    Doesn't affect current pairings  
+Key: OneCardPerUser  
+Type: Bool  
 
-Disable FileVault auto-login
-payloadType: com.apple.loginwindow
-Key: DisableFDEAutoLogin
-Type: Bool
+Disable FileVault auto-login  
+payloadType: com.apple.loginwindow  
+Key: DisableFDEAutoLogin  
+Type: Bool  
 
-Show list of users at login window (maybe legacy requirement?)
-payloadType: com.apple.loginwindow
-Key: SHOWFULLNAME
-Type: Int (0)
+Show list of users at login window (maybe legacy requirement?)  
+payloadType: com.apple.loginwindow  
+Key: SHOWFULLNAME  
+Type: Int (0)  
 
-Turn on smartcard debug (com.apple.security.smartcard.log https://ludovicrousseau.blogspot.com/2015/02/debug-smart-card-application-on-yosemite.html)
-payloadType: com.apple.security.smartcard
-Key: Logging
-Type: Bool
+Turn on smartcard debug (com.apple.security.smartcard.log https://ludovicrousseau.blogspot.com/2015/02/debug-smart-card-application-on-yosemite.html)  
+payloadType: com.apple.security.smartcard  
+Key: Logging  
+Type: Bool  
