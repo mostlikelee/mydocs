@@ -63,8 +63,21 @@ Mapping process for local accounts (not needed for AD bound machine):
 - append UPN to user's directory record
 - add to `/etc/SmartcardLogin.plist`:
 
-Commands
---------
+
+Match User to card cert
+-----------------------
+
+Hash Matching (tokend) / Fixed Key Mapping (CTK):
+Pairs the hash value of the card certs to a local account dscl record
+
+Attribute Matching:
+Allows selected attributes on a card cert to be mapped to an AD attribute
+
+PKINIT
+
+
+Commands CTK
+------------
 
 `security list-smartcards`  
 `security export-smartcard`  
@@ -104,6 +117,11 @@ PAM Modules / SSH
 -----------------
 PAM modules revert upon OS update.  Use ext attr to monitor and remediate.
 `/etc/pam.d/*`
+
+screensaver: /etc/pam.d/screensaver
+loginwindow: /etc/pam.d/authorization
+sudo: /etc/pam.d/sudo
+-play with this, order may matter and might just need "sufficient" ("required" may require password + pin)
 
 SSH:
 `/etc/ssh/sshd_config`
@@ -158,3 +176,10 @@ Turn on smartcard debug (com.apple.security.smartcard.log https://ludovicroussea
 payloadType: com.apple.security.smartcard  
 Key: Logging  
 Type: Bool  
+
+Disable CTK if you want to only use tokend
+payloadType: com.apple.security.smartcard
+Type: array
+Key: DisabledTokens
+Array: com.apple.CryptoTokenKit.pivtoken
+
